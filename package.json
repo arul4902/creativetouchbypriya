@@ -1,0 +1,19 @@
+{
+  "name": "creative-touch-by-priyaa",
+  "version": "1.0.0",
+  "description": "Luxury Bridal Makeup Brand Website for Creative Touch by Priyaa",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "keywords": [
+    "bridal-makeup",
+    "luxury-beauty",
+    "south-indian-wedding",
+    "chennai-makeup-artist",
+    "natural-glam"
+  ],
+  "author": "Creative Touch by Priyaa",
+  "license": "ISC"
+}
