@@ -21,8 +21,8 @@ const CMS_DATA = {
     locationShort: "Chennai",
     instagramHandle: "@creative_touch_by_priyaa",
     instagramUrl: "https://www.instagram.com/creative_touch_by_priyaa",
-    whatsappNumber: "919876543210", // Priyaa's WhatsApp (country code + number)
-    displayPhone: "+91 98765 43210",
+    whatsappNumber: "918939648180", // Priyaa's WhatsApp (country code + number)
+    displayPhone: "+91 89396 48180",
     email: "priyaa@creativetouchbypriyaa.com",
     activeSeason: "2026 Bridal Bookings Open",
     profilePhoto: "assets/images/about/priyaa-founder.jpg",
