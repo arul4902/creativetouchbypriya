@@ -60,6 +60,9 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -68,7 +71,14 @@ body {
   color: var(--color-espresso);
   line-height: 1.65;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   position: relative;
+}
+
+section, header, footer, main {
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 img, video {
@@ -179,6 +189,8 @@ h1, h2, h3, h4, .font-serif {
   position: relative;
   text-align: center;
   white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .btn-gold {
@@ -378,25 +390,33 @@ h1, h2, h3, h4, .font-serif {
 /* Mobile Drawer Menu */
 .mobile-nav-drawer {
   position: fixed;
-  top: var(--header-height);
-  left: 0;
+  top: 0;
   right: 0;
-  bottom: 0;
+  width: min(340px, 86vw);
+  height: 100vh;
+  height: 100dvh;
   background: rgba(250, 247, 242, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 30px 24px;
+  padding: 84px 24px 36px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transform: translateX(100%);
-  transition: transform var(--transition-normal);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--transition-normal), visibility var(--transition-normal), opacity var(--transition-normal);
   z-index: 999;
   overflow-y: auto;
+  box-shadow: -10px 0 35px rgba(39, 33, 28, 0.12);
 }
 
 .mobile-nav-drawer.open {
   transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-nav-list {
@@ -1434,6 +1454,14 @@ h1, h2, h3, h4, .font-serif {
 .reels-section {
   background-color: var(--color-dark-bg);
   color: #FFFFFF;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.reels-section .container {
+  overflow: hidden;
 }
 
 .reels-section h2,
@@ -2174,6 +2202,16 @@ dialog.editorial-modal[open]::backdrop {
   .container {
     padding-left: 20px;
     padding-right: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .btn {
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+    max-width: 100%;
   }
 
   .desktop-nav,
@@ -2190,14 +2228,7 @@ dialog.editorial-modal[open]::backdrop {
   }
 
   .floating-whatsapp {
-    bottom: 80px; /* Sits cleanly above bottom bar */
-    right: 18px;
-  }
-
-  .whatsapp-bubble {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    display: none !important; /* Mobile bottom bar provides direct WhatsApp access */
   }
 
   .hero-section {
@@ -2207,27 +2238,65 @@ dialog.editorial-modal[open]::backdrop {
   }
 
   .hero-title {
-    font-size: clamp(2.2rem, 8vw, 2.8rem);
+    font-size: clamp(2.1rem, 7.5vw, 2.7rem);
+    word-break: break-word;
+  }
+
+  .hero-credibility {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-credibility::before {
+    display: none;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 12px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-media-wrap {
+    width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
   }
 
   .hero-image-frame {
-    max-width: 340px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .hero-floating-card {
+    position: absolute;
+    bottom: 12px;
     left: 10px;
     right: 10px;
-    bottom: 12px;
     padding: 10px 14px;
+    max-width: calc(100% - 20px);
+    box-sizing: border-box;
   }
 
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 20px 16px;
   }
 
-  .trust-item:nth-child(2)::after {
-    display: none;
+  .trust-item::after {
+    display: none !important;
   }
 
   .philosophy-grid {
@@ -2242,6 +2311,13 @@ dialog.editorial-modal[open]::backdrop {
 
   .quiz-options-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quiz-recommendation-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 14px;
   }
 
   .comparison-wrapper {
@@ -2283,19 +2359,20 @@ dialog.editorial-modal[open]::backdrop {
   .reels-grid {
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     gap: 16px;
-    padding: 4px 4px 16px 4px;
+    padding: 10px 4px 20px 4px;
     -webkit-overflow-scrolling: touch;
-    max-width: none;
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
 
   .reel-card {
-    flex: 0 0 250px;
-    scroll-snap-align: center;
+    flex: 0 0 240px;
+    scroll-snap-align: start;
   }
 
   .form-row-2 {
@@ -2307,17 +2384,28 @@ dialog.editorial-modal[open]::backdrop {
     grid-template-columns: 1fr;
   }
 
+  .faq-question {
+    padding: 16px 18px;
+    font-size: 1.05rem;
+    gap: 10px;
+  }
+
+  .faq-answer {
+    padding: 0 18px;
+  }
+
   .modal-inner {
     grid-template-columns: 1fr;
+    max-height: 85vh;
   }
 
   .modal-media {
-    min-height: 240px;
-    max-height: 300px;
+    min-height: 220px;
+    max-height: 280px;
   }
 
   .modal-content-area {
-    padding: 24px 20px;
+    padding: 22px 18px;
   }
 
   .footer-grid {
@@ -2326,34 +2414,37 @@ dialog.editorial-modal[open]::backdrop {
   }
 }
 
-/* Small Mobile Screens (360px - 400px) */
-@media (max-width: 400px) {
+/* Small Mobile Screens (320px - 480px) */
+@media (max-width: 480px) {
   .logo-title {
     font-size: 1.15rem;
+  }
+  .logo-subtitle {
+    font-size: 0.58rem;
   }
   .logo-symbol {
     width: 36px;
     height: 36px;
   }
-  .hero-cta-group {
-    flex-direction: column;
-    width: 100%;
-  }
-  .hero-cta-group .btn {
-    width: 100%;
+  .hero-title {
+    font-size: clamp(1.9rem, 8.5vw, 2.4rem);
   }
   .filter-bar {
     gap: 6px;
   }
   .filter-btn {
-    padding: 6px 14px;
+    padding: 6px 12px;
     font-size: 0.72rem;
   }
   .quiz-container {
-    padding: 20px 16px;
+    padding: 20px 14px;
   }
   .enquiry-form-card {
-    padding: 20px 16px;
+    padding: 20px 14px;
+  }
+  .mobile-bottom-btn {
+    font-size: 0.7rem;
+    padding: 0 6px;
   }
 }
 
